@@ -106,6 +106,7 @@ my %opt;
     'snpEff_path'			=> '/hpc/local/CentOS7/cog_bioinf/snpEff_v4.1h',
     'igvtools_path'			=> '/hpc/local/CentOS7/cog_bioinf/igvtools-2.3.60/igvtools',
     'dbnsfp_path'			=> '/hpc/cog_bioinf/common_dbs/dbNSFP/dbNSFPv2.9/dbNSFP2.9.txt.gz',
+    'gatk_bundle_path'			=> '/hpc/cog_bioinf/common_scripts/GATK_v2.7/bundle',
 );
 
 die usage() if @ARGV == 0;
@@ -163,7 +164,7 @@ die "[ERROR] Design file is not in right format. See -h for lay-out.\n" if ( ($o
 
 my $SPECIES = uc $opt{species};
 my %annotationDB = ( 'HUMAN' => 'org.Hs.eg.db', 'RAT' => 'org.Rn.eg.db', 'MOUSE' => 'org.Mm.eg.db', 'ZEBRAFISH' => 'org.Dr.eg.db', 'DOG' => 'org.Cf.eg.db', 'ARABIDOPSIS' => 'org.At.tair.db' );
-my @knownSites = qw(/hpc/cog_bioinf/common_scripts/GATK_v2.7/bundle/1000G_phase1.indels.b37.vcf /hpc/cog_bioinf/common_scripts/GATK_v2.7/bundle/dbsnp_137.b37.vcf /hpc/cog_bioinf/common_scripts/GATK_v2.7/bundle/Mills_and_1000G_gold_standard.indels.b37.vcf);
+my @knownSites = ("$opt{gatk_bundle_path}/1000G_phase1.indels.b37.vcf", "$opt{gatk_bundle_path}/dbsnp_137.b37.vcf", "$opt{gatk_bundle_path}/Mills_and_1000G_gold_standard.indels.b37.vcf");
 
 if ($SPECIES eq "HUMAN"){
     $opt{genome} .= '/Homo_sapiens.GRCh37';
